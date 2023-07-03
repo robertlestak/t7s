@@ -1,4 +1,4 @@
-VERSION=v0.0.1
+VERSION=v0.0.2
 
 bin: bin/t7s_darwin bin/t7s_linux bin/t7s_windows
 

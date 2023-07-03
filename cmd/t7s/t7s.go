@@ -37,6 +37,7 @@ func main() {
 	indexMerge := t7sflags.Bool("m", false, "Index merge with existing variables")
 	varfile := t7sflags.String("v", "variables.yaml", "Variables file")
 	require := t7sflags.Bool("r", false, "Require all variables to be set")
+	sortVars := t7sflags.Bool("s", false, "Sort variables")
 	version := t7sflags.Bool("version", false, "Print version")
 	t7sflags.Usage = usage
 	t7sflags.Parse(os.Args[1:])
@@ -69,6 +70,7 @@ func main() {
 		JobType:    jt,
 		VarFile:    *varfile,
 		Require:    *require,
+		SortVars:   *sortVars,
 		IndexMerge: *indexMerge,
 	}
 	if err := t.Run(); err != nil {

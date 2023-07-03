@@ -16,6 +16,7 @@ Options:
   -r    Require all variables to be set
   -right string
         Right delimiter (default "}}")
+  -s    Sort variables
   -v string
         Variables file (default "variables.yaml")
   -version

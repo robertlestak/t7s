@@ -5,6 +5,8 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"sort"
+	"strings"
 
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
@@ -28,6 +30,7 @@ type T7s struct {
 	OutPath    string
 	VarFile    string
 	IndexMerge bool
+	SortVars   bool
 	Variables  []Variable
 	JobType    JobType
 	Require    bool
@@ -139,6 +142,12 @@ func (t *T7s) OutputVariables() error {
 		return err
 	}
 	defer of.(io.WriteCloser).Close()
+	if t.SortVars {
+		// order variables by name
+		sort.Slice(t.Variables, func(i, j int) bool {
+			return strings.ToLower(t.Variables[i].Name) < strings.ToLower(t.Variables[j].Name)
+		})
+	}
 	// output yaml
 	vc := VariablesCfg{
 		Variables: t.Variables,
