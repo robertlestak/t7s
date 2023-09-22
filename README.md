@@ -220,3 +220,28 @@ EOF
 # index the template directory to generate a variables file
 $ t7s -i templates variables.yaml
 ```
+
+## Docker Usage
+
+`t7s` is also available as a docker image at `robertlestak/t7s` and can be used as follows:
+
+```bash
+# create a template file
+$ cat > template.txt <<EOF
+Hello {{name}}!
+EOF
+
+# create a variables file
+$ cat > variables.yaml <<EOF
+variables:
+- name: name
+  value: world
+  description: name of the person to greet
+EOF
+
+# render the template
+$ docker run --rm -v $(pwd):/data robertlestak/t7s template.txt
+Hello world!
+```
+
+The default working directory is `/data` and the default entrypoint is `t7s`.
